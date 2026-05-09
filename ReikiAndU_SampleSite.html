@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reiki & U — Alternative Healing | SAMPLE PREVIEW</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0a0a0a;--deep:#111014;--gold:#c9a84c;--gold-light:#e8c97a;--gold-pale:#f5e9c8;
+  --purple:#4a1a6e;--purple-mid:#6b2fa0;--purple-light:#9b59c4;--purple-pale:#e8d5f5;
+  --cream:#faf8f4;--white:#ffffff;--muted:#6b6560;--border:rgba(201,168,76,0.2);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Raleway',sans-serif;background:var(--deep);color:var(--cream);overflow-x:hidden;padding-bottom:56px}
+
+/* WATERMARKS */
+#wm-diagonal{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-35deg);
+  font-size:clamp(8rem,22vw,16rem);
+  font-family:'Cinzel',serif;
+  color:rgba(158,43,26,0.13);
+  pointer-events:none;z-index:9998;
+  white-space:nowrap;user-select:none;
+  letter-spacing:0.05em;
+}
+#wm-repeat{
+  position:fixed;inset:0;z-index:9997;pointer-events:none;
+  background-image:repeating-linear-gradient(
+    -35deg,
+    transparent,transparent 80px,
+    rgba(158,43,26,0.04) 80px,rgba(158,43,26,0.04) 81px
+  );
+}
+#wm-text-overlay{
+  position:fixed;inset:0;z-index:9997;pointer-events:none;
+  display:flex;flex-wrap:wrap;align-items:flex-start;
+  overflow:hidden;opacity:0.055;
+}
+#wm-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:9999;
+  background:#1a0a0a;border-top:2px solid #9e2b1a;
+  padding:9px 20px;display:flex;align-items:center;gap:12px;
+  font-family:'Raleway',sans-serif;font-size:12px;color:#ddd;
+  box-shadow:0 -2px 20px rgba(0,0,0,0.5);
+}
+#wm-badge{
+  background:#9e2b1a;color:#fff;padding:4px 10px;
+  border-radius:4px;font-weight:600;font-size:11px;
+  white-space:nowrap;letter-spacing:0.5px;flex-shrink:0;
+}
+#wm-bar-text{flex:1;line-height:1.4}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 40px;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(10,10,14,0.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cinzel',serif;font-size:20px;color:var(--gold);letter-spacing:2px;cursor:pointer}
+.nav-logo span{color:var(--purple-light);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:23px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--cream);text-decoration:none;opacity:0.7;
+  transition:opacity 0.2s,color 0.2s;cursor:pointer;
+}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold)}
+.nav-mobile{display:none;background:none;border:1px solid var(--border);
+  color:var(--cream);padding:6px 10px;cursor:pointer;font-size:18px}
+
+/* PAGES */
+.page{display:none;padding-top:72px;min-height:100vh}
+.page.active{display:block}
+
+/* ===== HOME ===== */
+.hero{
+  position:relative;min-height:92vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:80px 40px;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 50%,rgba(74,26,110,0.4) 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 30%,rgba(201,168,76,0.1) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 100%,rgba(107,47,160,0.25) 0%,transparent 60%);
+  z-index:0;
+}
+.chakra-orbs{position:absolute;inset:0;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;opacity:0.1;filter:blur(50px);animation:drift 12s ease-in-out infinite alternate}
+.orb1{width:350px;height:350px;background:#e63946;top:5%;left:3%;animation-delay:0s}
+.orb2{width:220px;height:220px;background:#f77f00;top:25%;left:12%;animation-delay:2s}
+.orb3{width:280px;height:280px;background:#fcca46;top:40%;left:5%;animation-delay:4s}
+.orb4{width:240px;height:240px;background:#2dc653;top:60%;right:8%;animation-delay:1s}
+.orb5{width:300px;height:300px;background:#4361ee;bottom:5%;right:15%;animation-delay:3s}
+.orb6{width:260px;height:260px;background:#7b2d8b;top:10%;right:3%;animation-delay:5s}
+@keyframes drift{0%{transform:translateY(0) scale(1)}100%{transform:translateY(-30px) scale(1.05)}}
+.hero-content{position:relative;z-index:1;animation:fadeUp 1s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;opacity:0.9}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(3rem,8vw,6rem);font-weight:400;color:var(--white);line-height:1.05;margin-bottom:8px}
+.hero-title em{font-family:'Cormorant Garamond',serif;color:var(--gold-light);font-style:italic;font-weight:300;font-size:1.15em}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--purple-light);font-style:italic;margin:20px 0 32px;font-weight:300;letter-spacing:2px}
+.hero-divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 32px}
+.hero-desc{font-size:15px;color:rgba(250,248,244,0.7);max-width:540px;line-height:1.9;margin:0 auto 44px}
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  display:inline-block;padding:15px 44px;background:transparent;
+  border:1px solid var(--gold);color:var(--gold);
+  font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;cursor:pointer;transition:background 0.3s,color 0.3s;
+  text-decoration:none;
+}
+.btn-primary:hover{background:var(--gold);color:var(--black)}
+.btn-ghost{
+  display:inline-block;padding:15px 44px;background:transparent;
+  border:1px solid rgba(250,248,244,0.25);color:var(--cream);
+  font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;cursor:pointer;transition:all 0.3s;text-decoration:none;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+.section-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:12px}
+.section-title{font-family:'Cinzel',serif;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--white);text-align:center;margin-bottom:8px}
+.section-sub{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--purple-light);font-style:italic;text-align:center;margin-bottom:52px}
+
+.services-strip{padding:90px 40px;background:rgba(0,0,0,0.3)}
+.services-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;background:var(--border);border:1px solid var(--border);
+  max-width:1100px;margin:0 auto;
+}
+.service-card{background:var(--deep);padding:40px 28px;text-align:center;transition:background 0.3s}
+.service-card:hover{background:rgba(74,26,110,0.22)}
+.service-icon{font-size:36px;margin-bottom:18px;display:block}
+.service-card h3{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2.5px;color:var(--gold);margin-bottom:12px;text-transform:uppercase}
+.service-card p{font-size:13px;color:rgba(250,248,244,0.58);line-height:1.8}
+
+.testimonial-strip{padding:90px 40px;text-align:center;border-top:1px solid var(--border)}
+blockquote{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-style:italic;color:var(--cream);max-width:700px;margin:0 auto 20px;line-height:1.6;font-weight:300}
+blockquote::before{content:'\201C';font-size:4.5rem;color:var(--gold);line-height:0;vertical-align:-1.2rem;margin-right:6px}
+cite{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:0.7}
+
+/* ===== SERVICES PAGE ===== */
+.page-header{padding:60px 40px 48px;text-align:center;border-bottom:1px solid var(--border)}
+.services-full{padding:60px 40px;max-width:1100px;margin:0 auto}
+.service-row{display:grid;grid-template-columns:220px 1fr;gap:56px;padding:52px 0;border-bottom:1px solid var(--border);align-items:start}
+.service-row:last-child{border-bottom:none}
+.service-row-icon{font-size:52px;margin-bottom:14px}
+.service-row-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.service-row-title{font-family:'Cormorant Garamond',serif;font-size:2.1rem;color:var(--white);font-weight:300;line-height:1.2}
+.service-row-body h4{font-family:'Cinzel',serif;font-size:13px;color:var(--white);margin-bottom:14px;letter-spacing:1px}
+.service-row-body p{font-size:14px;color:rgba(250,248,244,0.62);line-height:1.85;margin-bottom:18px}
+.price-tag{display:inline-block;padding:7px 20px;border:1px solid var(--gold);color:var(--gold);font-size:12px;letter-spacing:2px;font-family:'Cinzel',serif}
+
+/* ===== SHOP ===== */
+.shop-filter{display:flex;gap:12px;justify-content:center;padding:32px 40px 0;flex-wrap:wrap}
+.filter-btn{
+  padding:8px 22px;background:transparent;border:1px solid var(--border);
+  color:rgba(250,248,244,0.6);font-family:'Raleway',sans-serif;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;
+}
+.filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold)}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;padding:40px 40px 20px;max-width:1200px;margin:0 auto}
+.product-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);transition:border-color 0.3s,transform 0.3s;cursor:default}
+.product-card:hover{border-color:var(--gold);transform:translateY(-5px)}
+.product-img{height:230px;display:flex;align-items:center;justify-content:center;font-size:72px;background:rgba(74,26,110,0.12);border-bottom:1px solid var(--border)}
+.product-info{padding:22px}
+.product-category{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--purple-light);margin-bottom:7px}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--white);margin-bottom:8px;font-weight:300}
+.product-desc{font-size:12px;color:rgba(250,248,244,0.52);line-height:1.7;margin-bottom:18px}
+.product-footer{display:flex;justify-content:space-between;align-items:center}
+.product-price{font-family:'Cinzel',serif;color:var(--gold);font-size:15px}
+.add-btn{
+  padding:8px 18px;background:transparent;border:1px solid var(--gold);
+  color:var(--gold);font-size:10px;letter-spacing:2px;cursor:pointer;
+  font-family:'Raleway',sans-serif;text-transform:uppercase;transition:all 0.2s;
+}
+.add-btn:hover{background:var(--gold);color:var(--black)}
+.cart-bar{
+  position:sticky;bottom:56px;background:rgba(10,10,14,0.97);
+  border-top:1px solid var(--gold);padding:14px 40px;
+  display:flex;justify-content:space-between;align-items:center;z-index:50;
+  backdrop-filter:blur(10px);
+}
+
+/* ===== BOOKING ===== */
+.booking-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:80vh}
+.booking-left{padding:56px 48px;border-right:1px solid var(--border)}
+.booking-right{padding:56px 48px;background:rgba(74,26,110,0.07)}
+.booking-h2{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--white);margin-bottom:10px}
+.booking-left p,.booking-right p{font-size:13px;color:rgba(250,248,244,0.58);margin-bottom:28px;line-height:1.8}
+.service-select{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.service-option{
+  padding:14px 18px;border:1px solid var(--border);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;transition:all 0.2s;
+}
+.service-option:hover,.service-option.selected{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+.service-option-name{font-size:13px;color:var(--cream)}
+.service-option-price{font-size:13px;color:var(--gold);font-family:'Cinzel',serif}
+.cal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.cal-month-label{font-family:'Cinzel',serif;font-size:14px;letter-spacing:2px;color:var(--gold)}
+.cal-nav{background:none;border:1px solid var(--border);color:var(--cream);width:32px;height:32px;cursor:pointer;font-size:18px;transition:all 0.2s;line-height:1}
+.cal-nav:hover{border-color:var(--gold);color:var(--gold)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:28px}
+.cal-day-name{font-size:10px;letter-spacing:1px;text-align:center;color:rgba(250,248,244,0.35);padding:6px 0}
+.cal-day{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;border:1px solid transparent;transition:all 0.2s;color:var(--cream);border-radius:2px}
+.cal-day:hover:not(.empty):not(.past){border-color:var(--gold);color:var(--gold)}
+.cal-day.selected{background:var(--gold);color:var(--black);border-color:var(--gold);font-weight:600}
+.cal-day.today{color:var(--purple-light);font-weight:600}
+.cal-day.past{opacity:0.25;cursor:default}
+.cal-day.empty{cursor:default}
+.cal-day.weekend:not(.past){opacity:0.35;cursor:default}
+.time-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,248,244,0.38);margin-bottom:12px}
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:28px}
+.time-slot{padding:9px;border:1px solid var(--border);text-align:center;font-size:12px;cursor:pointer;transition:all 0.2s;color:var(--cream);border-radius:2px}
+.time-slot:hover,.time-slot.selected{border-color:var(--gold);color:var(--gold)}
+.time-slot.selected{background:rgba(201,168,76,0.1)}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,248,244,0.45);margin-bottom:7px}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  color:var(--cream);padding:11px 14px;font-family:'Raleway',sans-serif;
+  font-size:13px;outline:none;transition:border-color 0.2s;border-radius:2px;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
+.form-group select option{background:var(--deep)}
+.form-group textarea{height:88px;resize:vertical}
+.booking-summary{padding:18px;border:1px solid var(--gold);margin-bottom:20px;display:none;background:rgba(201,168,76,0.05)}
+.booking-summary-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.booking-summary p{font-size:13px;color:var(--cream);margin-bottom:4px}
+
+/* ===== CONTACT ===== */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding:60px 60px;max-width:1100px;margin:0 auto}
+.contact-info h2{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--white);margin-bottom:18px}
+.contact-info > p{font-size:14px;color:rgba(250,248,244,0.62);line-height:1.85;margin-bottom:36px}
+.contact-detail{display:flex;align-items:flex-start;gap:18px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.contact-detail:last-of-type{border-bottom:none}
+.contact-icon{font-size:26px;margin-top:2px;flex-shrink:0}
+.contact-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.contact-value{font-size:14px;color:var(--cream);line-height:1.6}
+.social-links{display:flex;gap:14px;margin-top:32px}
+.social-link{width:42px;height:42px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:border-color 0.2s;text-decoration:none;color:var(--cream)}
+.social-link:hover{border-color:var(--gold)}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.submit-btn{padding:15px;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;margin-top:6px}
+.submit-btn:hover{background:var(--gold);color:var(--black)}
+
+/* FOOTER */
+footer{padding:48px 40px;border-top:1px solid var(--border);text-align:center}
+.footer-logo{font-family:'Cinzel',serif;color:var(--gold);font-size:20px;margin-bottom:14px;letter-spacing:2px}
+footer p{font-size:12px;color:rgba(250,248,244,0.32);margin:5px 0;line-height:1.7}
+
+/* NOTIFICATION */
+.notif{
+  position:fixed;top:90px;right:24px;background:var(--deep);
+  border:1px solid var(--gold);padding:14px 22px;font-size:13px;
+  color:var(--gold);z-index:200;opacity:0;transition:opacity 0.3s;
+  pointer-events:none;max-width:320px;line-height:1.5;
+}
+.notif.show{opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .nav-mobile{display:block}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:58px;left:0;right:0;background:rgba(10,10,14,0.98);padding:20px;gap:16px;border-bottom:1px solid var(--border)}
+  .hero{padding:60px 20px}
+  .hero-title{font-size:3rem}
+  .services-strip,.testimonial-strip{padding:60px 20px}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .service-row{grid-template-columns:1fr;gap:20px}
+  .booking-layout{grid-template-columns:1fr}
+  .booking-left{border-right:none;border-bottom:1px solid var(--border);padding:40px 24px}
+  .booking-right{padding:40px 24px}
+  .contact-layout{grid-template-columns:1fr;gap:40px;padding:40px 24px}
+  .shop-grid{padding:24px 20px}
+  .services-full{padding:40px 20px}
+  .page-header{padding:40px 20px 32px}
+  blockquote{font-size:1.4rem}
+  .cart-bar{padding:12px 20px;flex-wrap:wrap;gap:10px}
+  #wm-bar{font-size:11px;padding:8px 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- WATERMARKS -->
+<div id="wm-diagonal">SAMPLE</div>
+<div id="wm-repeat"></div>
+<div id="wm-bar">
+  <span id="wm-badge">Sample Site</span>
+  <span id="wm-bar-text">This is a complimentary preview — designed exclusively for you by <strong>CMB Enterprise Group LLC</strong> &nbsp;·&nbsp; Contact Carla Bee @ info@carlabee.com</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Reiki <span>& U</span></div>
+  <ul class="nav-links" id="nav-menu">
+    <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
+    <li><a onclick="showPage('shop')" id="nav-shop">Shop</a></li>
+    <li><a onclick="showPage('booking')" id="nav-booking">Book a Session</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+  <button class="nav-mobile" onclick="toggleMenu()" aria-label="Menu">☰</button>
+</nav>
+
+<div class="notif" id="notif"></div>
+
+<!-- ==================== HOME ==================== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="chakra-orbs">
+      <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+      <div class="orb orb4"></div><div class="orb orb5"></div><div class="orb orb6"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Cheyenne, Wyoming &nbsp;·&nbsp; Alternative Healing</p>
+      <h1 class="hero-title">Reiki <em>&amp; U</em></h1>
+      <p class="hero-tagline">Restore &nbsp;·&nbsp; Realign &nbsp;·&nbsp; Renew</p>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">Experience the transformative power of Reiki energy healing — remote sessions, classes, life coaching, and handcrafted holistic products, each one customized to your unique healing journey.</p>
+      <div class="btn-row">
+        <a onclick="showPage('booking')" class="btn-primary">Book a Session</a>
+        <a onclick="showPage('services')" class="btn-ghost">Our Services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-strip">
+    <p class="section-eyebrow">What We Offer</p>
+    <h2 class="section-title">Holistic Healing for Every Soul</h2>
+    <p class="section-sub">Where ancient wisdom meets your modern life</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">✦</span>
+        <h3>Remote Reiki</h3>
+        <p>Energy healing sessions conducted from the comfort of your sacred space — anywhere in the world.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">☽</span>
+        <h3>Reiki Classes</h3>
+        <p>Learn to channel healing energy. Beginner through master-level training available.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🕯</span>
+        <h3>Handmade Candles</h3>
+        <p>Intention-infused candles crafted to elevate your space and support your healing journey.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">◈</span>
+        <h3>Life Coaching</h3>
+        <p>Soul-aligned guidance to help you break through blocks and step fully into your power.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🌿</span>
+        <h3>Incense & Botanicals</h3>
+        <p>Handmade incense and botanical blends to cleanse, protect, and sanctify your environment.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">☯</span>
+        <h3>Prayers & More</h3>
+        <p>Spiritual support, prayer services, and customized healing rituals for your unique needs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonial-strip">
+    <p class="section-eyebrow">Client Love</p>
+    <blockquote>Queen's Reiki session changed something deep in me. I felt lighter, clearer, and more myself than I had in years.</blockquote>
+    <br>
+    <cite>— A grateful soul, Cheyenne WY</cite>
+  </section>
+
+  <footer>
+    <p class="footer-logo">Reiki & U</p>
+    <p>Alternative Healing &nbsp;·&nbsp; Cheyenne, Wyoming</p>
+    <p>reikiandu@icloud.com &nbsp;·&nbsp; (307) 776-4576</p>
+    <p style="margin-top:10px">© 2025 Reiki & U &nbsp;·&nbsp; All Rights Reserved</p>
+  </footer>
+</div>
+
+<!-- ==================== SERVICES ==================== -->
+<div class="page" id="page-services">
+  <div class="page-header">
+    <p class="section-eyebrow">Healing Offerings</p>
+    <h1 class="section-title">Our Services</h1>
+    <p class="section-sub">Highly responsive &nbsp;·&nbsp; Community-rooted &nbsp;·&nbsp; Customized to you</p>
+  </div>
+  <div class="services-full">
+    <div class="service-row">
+      <div>
+        <div class="service-row-icon">✦</div>
+        <div class="service-row-label">Energy Healing</div>
+        <div class="service-row-title">Remote Reiki Sessions</div>
+      </div>
+      <div class="service-row-body">
+        <h4>Healing Has No Distance</h4>
+        <p>Reiki energy transcends physical space. Our remote sessions are conducted via a scheduled virtual connection, allowing you to receive full healing from anywhere in the world. Each session is personalized, addressing your specific energetic blocks, intentions, and needs.</p>
+        <p>Sessions include pre-session consultation, 45-minute energy treatment, and post-session integration guidance.</p>
+        <span class="price-tag">Starting at $75</span>
+      </div>
+    </div>
+    <div class="service-row">
+      <div>
+        <div class="service-row-icon">☽</div>
+        <div class="service-row-label">Education</div>
+        <div class="service-row-title">Reiki Classes</div>
+      </div>
+      <div class="service-row-body">
+        <h4>Learn to Heal Yourself &amp; Others</h4>
+        <p>Queen offers Reiki training for all levels — from complete beginners to those seeking Master-level attunement. Classes are intimate, personalized, and conducted in a sacred learning environment.</p>
+        <p>Level I, Level II, and Reiki Master certifications available. Group and private sessions offered.</p>
+        <span class="price-tag">Level I from $150</span>
+      </div>
+    </div>
+    <div class="service-row">
+      <div>
+        <div class="service-row-icon">◈</div>
+        <div class="service-row-label">Guidance</div>
+        <div class="service-row-title">Life Coaching</div>
+      </div>
+      <div class="service-row-body">
+        <h4>Align Your Life with Your Soul's Purpose</h4>
+        <p>Our holistic life coaching approach blends spiritual wisdom with practical strategy to help you overcome obstacles, clarify your vision, and move forward with confidence and clarity.</p>
+        <p>Single sessions and monthly packages available. Email-based follow-up support included.</p>
+        <span class="price-tag">Starting at $90</span>
+      </div>
+    </div>
+    <div class="service-row">
+      <div>
+        <div class="service-row-icon">🌿</div>
+        <div class="service-row-label">Handcrafted Products</div>
+        <div class="service-row-title">Candles &amp; Incense</div>
+      </div>
+      <div class="service-row-body">
+        <h4>Sanctify Your Space</h4>
+        <p>Every candle and incense stick is handmade with intention — infused with healing herbs, essential oils, and sacred energy. Designed to elevate your environment, support your rituals, and bring beauty to your daily life.</p>
+        <p>Available in the shop for individual purchase or as curated healing bundles.</p>
+        <span class="price-tag">Shop starting at $18</span>
+      </div>
+    </div>
+    <div class="service-row">
+      <div>
+        <div class="service-row-icon">☯</div>
+        <div class="service-row-label">Spiritual Support</div>
+        <div class="service-row-title">Prayers &amp; Rituals</div>
+      </div>
+      <div class="service-row-body">
+        <h4>You Are Never Alone on This Journey</h4>
+        <p>Intercessory prayer, spiritual guidance, and customized healing rituals offered with deep compassion and full confidentiality. Community care pricing available — no one is ever turned away for inability to pay.</p>
+        <span class="price-tag">By donation / sliding scale</span>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:40px 40px 60px">
+    <a onclick="showPage('booking')" class="btn-primary">Schedule Your Session</a>
+  </div>
+  <footer>
+    <p class="footer-logo">Reiki & U</p>
+    <p>© 2025 Reiki & U &nbsp;·&nbsp; All Rights Reserved</p>
+  </footer>
+</div>
+
+<!-- ==================== SHOP ==================== -->
+<div class="page" id="page-shop">
+  <div class="page-header">
+    <p class="section-eyebrow">Holistic Products</p>
+    <h1 class="section-title">The Healing Shop</h1>
+    <p class="section-sub">Handcrafted with intention, love, and sacred energy</p>
+  </div>
+  <div class="shop-filter">
+    <button class="filter-btn active" onclick="filterShop('all',this)">All Products</button>
+    <button class="filter-btn" onclick="filterShop('candles',this)">Candles</button>
+    <button class="filter-btn" onclick="filterShop('incense',this)">Incense</button>
+    <button class="filter-btn" onclick="filterShop('bundles',this)">Bundles</button>
+    <button class="filter-btn" onclick="filterShop('tools',this)">Spiritual Tools</button>
+  </div>
+  <div class="shop-grid" id="shop-grid">
+    <div class="product-card" data-cat="candles">
+      <div class="product-img">🕯</div>
+      <div class="product-info">
+        <p class="product-category">Candles</p>
+        <h3 class="product-name">Sacred Space Soy Candle</h3>
+        <p class="product-desc">Hand-poured with intention-setting herbs and essential oils. Lavender, sage & frankincense blend. Burns 40+ hours.</p>
+        <div class="product-footer">
+          <span class="product-price">$24.00</span>
+          <button class="add-btn" onclick="addToCart('Sacred Space Candle',24)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="candles">
+      <div class="product-img">🕯</div>
+      <div class="product-info">
+        <p class="product-category">Candles</p>
+        <h3 class="product-name">Crown Chakra Candle</h3>
+        <p class="product-desc">Violet-tinted, infused with amethyst crystals and jasmine. Opens the path to higher consciousness.</p>
+        <div class="product-footer">
+          <span class="product-price">$28.00</span>
+          <button class="add-btn" onclick="addToCart('Crown Chakra Candle',28)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="candles">
+      <div class="product-img">🕯</div>
+      <div class="product-info">
+        <p class="product-category">Candles</p>
+        <h3 class="product-name">Root Chakra Grounding Candle</h3>
+        <p class="product-desc">Deep red with cedarwood, patchouli & black tourmaline chips. For stability, safety, and grounding.</p>
+        <div class="product-footer">
+          <span class="product-price">$26.00</span>
+          <button class="add-btn" onclick="addToCart('Root Chakra Candle',26)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="incense">
+      <div class="product-img">🌿</div>
+      <div class="product-info">
+        <p class="product-category">Incense</p>
+        <h3 class="product-name">Cleansing Incense Bundle</h3>
+        <p class="product-desc">Handmade herbal incense sticks — palo santo, white sage & cedar. 20-stick bundle for deep space clearing.</p>
+        <div class="product-footer">
+          <span class="product-price">$18.00</span>
+          <button class="add-btn" onclick="addToCart('Cleansing Incense Bundle',18)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="incense">
+      <div class="product-img">🌿</div>
+      <div class="product-info">
+        <p class="product-category">Incense</p>
+        <h3 class="product-name">Chakra Flow Incense Set</h3>
+        <p class="product-desc">Seven unique scents aligned with the seven chakras. A complete energetic support system in one beautiful set.</p>
+        <div class="product-footer">
+          <span class="product-price">$32.00</span>
+          <button class="add-btn" onclick="addToCart('Chakra Flow Incense Set',32)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="bundles">
+      <div class="product-img">✦</div>
+      <div class="product-info">
+        <p class="product-category">Bundles</p>
+        <h3 class="product-name">Reiki Starter Kit</h3>
+        <p class="product-desc">Everything you need to begin your healing journey — candle, incense, crystal, and guidance card. Perfect gift.</p>
+        <div class="product-footer">
+          <span class="product-price">$55.00</span>
+          <button class="add-btn" onclick="addToCart('Reiki Starter Kit',55)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="tools">
+      <div class="product-img">☽</div>
+      <div class="product-info">
+        <p class="product-category">Spiritual Tools</p>
+        <h3 class="product-name">Moon Phase Journal</h3>
+        <p class="product-desc">Guided journal for tracking your intentions, energy, and healing journey through the lunar cycles.</p>
+        <div class="product-footer">
+          <span class="product-price">$22.00</span>
+          <button class="add-btn" onclick="addToCart('Moon Phase Journal',22)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="bundles">
+      <div class="product-img">◈</div>
+      <div class="product-info">
+        <p class="product-category">Bundles</p>
+        <h3 class="product-name">Full Moon Ritual Kit</h3>
+        <p class="product-desc">Crown chakra candle, moon incense, selenite wand, and a printed full moon ritual guide. Limited quantities.</p>
+        <div class="product-footer">
+          <span class="product-price">$68.00</span>
+          <button class="add-btn" onclick="addToCart('Full Moon Ritual Kit',68)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cart-bar" id="cart-bar" style="display:none">
+    <div style="font-size:14px;color:var(--cream)">
+      🛒 &nbsp;<span id="cart-qty" style="color:var(--gold);font-family:'Cinzel',serif;font-size:16px">0</span> items &nbsp;·&nbsp;
+      Total: <span id="cart-total" style="color:var(--gold);font-family:'Cinzel',serif;font-size:16px">$0.00</span>
+    </div>
+    <button class="btn-primary" onclick="showNotif('Checkout coming soon — payment processing will be fully configured during the live build!')">Proceed to Checkout</button>
+  </div>
+  <footer style="margin-top:40px">
+    <p class="footer-logo">Reiki & U</p>
+    <p>© 2025 Reiki & U &nbsp;·&nbsp; All Rights Reserved</p>
+  </footer>
+</div>
+
+<!-- ==================== BOOKING ==================== -->
+<div class="page" id="page-booking">
+  <div class="page-header">
+    <p class="section-eyebrow">Sacred Scheduling</p>
+    <h1 class="section-title">Book Your Session</h1>
+    <p class="section-sub">Choose your service, select your time, and begin your healing</p>
+  </div>
+  <div class="booking-layout">
+    <div class="booking-left">
+      <h2 class="booking-h2">Choose a Service</h2>
+      <p>All sessions are conducted remotely via your preferred video platform. You'll receive a confirmation email with full connection details after booking.</p>
+      <div class="service-select">
+        <div class="service-option selected" onclick="selectService(this,'Remote Reiki Session (60 min)','$75')">
+          <span class="service-option-name">Remote Reiki Session (60 min)</span>
+          <span class="service-option-price">$75</span>
+        </div>
+        <div class="service-option" onclick="selectService(this,'Reiki Class — Level I','$150')">
+          <span class="service-option-name">Reiki Class — Level I</span>
+          <span class="service-option-price">$150</span>
+        </div>
+        <div class="service-option" onclick="selectService(this,'Life Coaching Session (60 min)','$90')">
+          <span class="service-option-name">Life Coaching Session (60 min)</span>
+          <span class="service-option-price">$90</span>
+        </div>
+        <div class="service-option" onclick="selectService(this,'Prayer &amp; Spiritual Guidance','Donation')">
+          <span class="service-option-name">Prayer &amp; Spiritual Guidance</span>
+          <span class="service-option-price">Donation</span>
+        </div>
+      </div>
+      <h2 class="booking-h2">Your Information</h2>
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="(xxx) xxx-xxxx"></div>
+      <div class="form-group"><label>Intentions or Notes for Queen</label><textarea placeholder="Share anything you'd like Queen to know before your session — intentions, concerns, or what you're hoping to work through..."></textarea></div>
+    </div>
+    <div class="booking-right">
+      <h2 class="booking-h2">Select a Date</h2>
+      <p>Available weekday appointments shown. Weekends by special arrangement.</p>
+      <div class="cal-header">
+        <button class="cal-nav" onclick="changeMonth(-1)">&#8249;</button>
+        <span class="cal-month-label" id="cal-month-label">May 2025</span>
+        <button class="cal-nav" onclick="changeMonth(1)">&#8250;</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <p class="time-label">Select a Time</p>
+      <div class="time-slots">
+        <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
+        <div class="time-slot" onclick="selectTime(this)">10:00 AM</div>
+        <div class="time-slot" onclick="selectTime(this)">11:00 AM</div>
+        <div class="time-slot" onclick="selectTime(this)">1:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this)">2:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this)">3:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this)">4:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this)">5:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this)">6:00 PM</div>
+      </div>
+      <div class="booking-summary" id="booking-summary">
+        <p class="booking-summary-label">Your Booking Summary</p>
+        <p id="sum-service"></p>
+        <p id="sum-datetime" style="color:rgba(250,248,244,0.65)"></p>
+      </div>
+      <button class="btn-primary" style="width:100%;text-align:center;display:block" onclick="submitBooking()">Confirm &amp; Book Session</button>
+    </div>
+  </div>
+  <footer>
+    <p class="footer-logo">Reiki & U</p>
+    <p>© 2025 Reiki & U &nbsp;·&nbsp; All Rights Reserved</p>
+  </footer>
+</div>
+
+<!-- ==================== CONTACT ==================== -->
+<div class="page" id="page-contact">
+  <div class="page-header">
+    <p class="section-eyebrow">Connect</p>
+    <h1 class="section-title">Reach Out</h1>
+    <p class="section-sub">We'd love to hear from you — no question too small</p>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info">
+      <h2>Let's Connect</h2>
+      <p>Queen is highly responsive and personally answers every inquiry. Whether you have questions about a service, need guidance on what's right for you, or simply want to share your heart — this is a safe and sacred space.</p>
+      <div class="contact-detail">
+        <span class="contact-icon">✉</span>
+        <div>
+          <p class="contact-label">Email</p>
+          <p class="contact-value">reikiandu@icloud.com</p>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-icon">☎</span>
+        <div>
+          <p class="contact-label">Phone</p>
+          <p class="contact-value">(307) 776-4576</p>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-icon">◎</span>
+        <div>
+          <p class="contact-label">Location</p>
+          <p class="contact-value">Cheyenne, Wyoming<br><span style="font-size:12px;color:var(--muted)">Remote sessions available worldwide</span></p>
+        </div>
+      </div>
+      <div class="social-links">
+        <a class="social-link" title="Instagram" href="#">📷</a>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <div class="form-group"><label>Your Name</label><input type="text" placeholder="Full name"></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Subject</label>
+          <select>
+            <option>General Inquiry</option>
+            <option>Session Questions</option>
+            <option>Class Information</option>
+            <option>Product Order</option>
+            <option>Spiritual Guidance</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea style="height:130px" placeholder="Share what's on your heart..."></textarea></div>
+        <button class="submit-btn" onclick="showNotif('Message sent! Queen will be in touch with you soon. ✦')">Send Message</button>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p class="footer-logo">Reiki & U</p>
+    <p>© 2025 Reiki & U &nbsp;·&nbsp; All Rights Reserved</p>
+  </footer>
+</div>
+
+<script>
+var cartItems=0,cartTotal=0;
+var calYear=2025,calMonth=4,selectedDate=null,selectedTime=null;
+var selectedService='Remote Reiki Session (60 min)',selectedPrice='$75';
+var menuOpen=false;
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active')});
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='booking')renderCalendar();
+  if(menuOpen)toggleMenu();
+}
+
+function toggleMenu(){
+  menuOpen=!menuOpen;
+  document.getElementById('nav-menu').classList.toggle('open',menuOpen);
+}
+
+function showNotif(msg){
+  var n=document.getElementById('notif');
+  n.textContent=msg;n.classList.add('show');
+  setTimeout(function(){n.classList.remove('show')},3500);
+}
+
+function addToCart(name,price){
+  cartItems++;cartTotal+=price;
+  var bar=document.getElementById('cart-bar');
+  bar.style.display='flex';
+  document.getElementById('cart-qty').textContent=cartItems;
+  document.getElementById('cart-total').textContent='$'+cartTotal.toFixed(2);
+  showNotif(name+' added to cart ✦');
+}
+
+function filterShop(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(function(card){
+    card.style.display=(cat==='all'||card.dataset.cat===cat)?'block':'none';
+  });
+}
+
+function selectService(el,name,price){
+  document.querySelectorAll('.service-option').forEach(function(o){o.classList.remove('selected')});
+  el.classList.add('selected');selectedService=name;selectedPrice=price;
+  updateSummary();
+}
+
+function selectTime(el){
+  document.querySelectorAll('.time-slot').forEach(function(t){t.classList.remove('selected')});
+  el.classList.add('selected');selectedTime=el.textContent;
+  updateSummary();
+}
+
+function updateSummary(){
+  if(selectedDate&&selectedTime){
+    var sumEl=document.getElementById('booking-summary');
+    sumEl.style.display='block';
+    document.getElementById('sum-service').textContent=selectedService+' · '+selectedPrice;
+    var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('sum-datetime').textContent=months[calMonth]+' '+selectedDate+', '+calYear+' at '+selectedTime;
+  }
+}
+
+function submitBooking(){
+  if(!selectedDate||!selectedTime){
+    showNotif('Please select a date and time to continue.');return;
+  }
+  showNotif('Booking request sent! Queen will confirm your session by email. ✦');
+}
+
+function renderCalendar(){
+  var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month-label').textContent=months[calMonth]+' '+calYear;
+  var grid=document.getElementById('cal-grid');
+  grid.innerHTML='';
+  ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(function(d){
+    var el=document.createElement('div');el.className='cal-day-name';el.textContent=d;grid.appendChild(el);
+  });
+  var firstDay=new Date(calYear,calMonth,1).getDay();
+  var daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  var today=new Date();
+  for(var i=0;i<firstDay;i++){
+    var el=document.createElement('div');el.className='cal-day empty';grid.appendChild(el);
+  }
+  for(var d=1;d<=daysInMonth;d++){
+    var el=document.createElement('div');el.className='cal-day';
+    var thisDate=new Date(calYear,calMonth,d);
+    var isToday=d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();
+    var isPast=thisDate<new Date(today.getFullYear(),today.getMonth(),today.getDate());
+    var dow=thisDate.getDay();
+    var isWeekend=(dow===0||dow===6);
+    if(isPast){el.classList.add('past');}
+    else if(isWeekend){el.classList.add('weekend');}
+    if(isToday)el.classList.add('today');
+    if(d===selectedDate&&!isPast&&!isWeekend)el.classList.add('selected');
+    el.textContent=d;
+    if(!isPast&&!isWeekend){
+      (function(day){
+        el.onclick=function(){
+          document.querySelectorAll('.cal-day').forEach(function(c){c.classList.remove('selected')});
+          el.classList.add('selected');selectedDate=day;updateSummary();
+        };
+      })(d);
+    }
+    grid.appendChild(el);
+  }
+}
+
+function changeMonth(dir){
+  calMonth+=dir;
+  if(calMonth<0){calMonth=11;calYear--;}
+  if(calMonth>11){calMonth=0;calYear++;}
+  selectedDate=null;
+  renderCalendar();
+}
+
+renderCalendar();
+</script>
+</body>
+</html>
